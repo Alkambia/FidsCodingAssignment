@@ -7,6 +7,7 @@ namespace FidsCodingAssignment.ViewModel
     {
         public int FlightId { get; set; }
         public DateTime? SchedTime { get; set; }
+        public DateTime? ActualTime { get; set; }
         public string AirLineCode { get; set; }
         public int FlightNumber { get; set; }
         public string CityName { get; set; }

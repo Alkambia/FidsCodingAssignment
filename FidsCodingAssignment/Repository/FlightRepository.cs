@@ -43,11 +43,10 @@ namespace FidsCodingAssignment.Repository
             if (flights == null)
                 return new List<Flight>();
 
-            var deltaBefore = TimeSpan.FromMinutes(-1 * delta); // Predefined delta
+            //var deltaBefore = TimeSpan.FromMinutes(-1 * delta); // Predefined delta
             var deltaAfter = TimeSpan.FromMinutes(delta); // Predefined delta
 
-            return flights.Where(f => f.ActualTime.HasValue && (f.ActualTime.Value + deltaBefore) <= f.ActualTime.Value 
-            && f.ActualTime.Value <= (f.ActualTime.Value + deltaAfter)).ToList();
+            return flights.Where(f => f.ActualTime.HasValue && f.ActualTime.Value < f.SchedTime.Value + deltaAfter).ToList();
         }
     }
 }

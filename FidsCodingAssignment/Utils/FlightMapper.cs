@@ -15,6 +15,7 @@ namespace FidsCodingAssignment.Utils
             {
                 FlightId = flight.FlightId,
                 SchedTime = flight.SchedTime,
+                ActualTime = flight.ActualTime,
                 AirLineCode = flight.AirLineCode,
                 FlightNumber = flight.FlightNumber,
                 CityName = flight.CityName,

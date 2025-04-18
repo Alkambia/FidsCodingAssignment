@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/FidsCodingAssignment/bin/Debug/net6.0
+/FidsCodingAssignment/obj
+/FlightXUnitTest/bin/Debug/net6.0
+/FlightXUnitTest/obj

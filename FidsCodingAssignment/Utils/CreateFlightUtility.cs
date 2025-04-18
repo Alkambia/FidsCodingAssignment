@@ -39,7 +39,8 @@ namespace FidsCodingAssignment.Utils
                 {
                     flight.FlightStatus = "Boarding";
                 }
-                else if (flight.SchedTime.HasValue && DateTime.Now >= flight.SchedTime.Value.AddMinutes(thresholdInMinutes))
+                //note: I jus assume DateTime.Now is the current time
+                else if (flight.ActualTime.HasValue && DateTime.Now >= flight.ActualTime.Value.AddMinutes(thresholdInMinutes))
                 {
                     flight.FlightStatus = "Closed";
                 }
