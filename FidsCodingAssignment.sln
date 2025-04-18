@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FidsCodingAssignment", "FidsCodingAssignment\FidsCodingAssignment.csproj", "{6603D3C4-551D-4BFB-9FE4-161BC1AABD8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightXUnitTest", "FlightXUnitTest\FlightXUnitTest.csproj", "{49B6F80F-F7FC-4121-9844-D7CFA9F897E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6603D3C4-551D-4BFB-9FE4-161BC1AABD8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6603D3C4-551D-4BFB-9FE4-161BC1AABD8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6603D3C4-551D-4BFB-9FE4-161BC1AABD8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6603D3C4-551D-4BFB-9FE4-161BC1AABD8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49B6F80F-F7FC-4121-9844-D7CFA9F897E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49B6F80F-F7FC-4121-9844-D7CFA9F897E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49B6F80F-F7FC-4121-9844-D7CFA9F897E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49B6F80F-F7FC-4121-9844-D7CFA9F897E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED53443D-F977-41D7-9723-D3E97AC44244}
+	EndGlobalSection
+EndGlobal
