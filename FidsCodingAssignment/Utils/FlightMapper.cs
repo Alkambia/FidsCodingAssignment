@@ -11,6 +11,15 @@ namespace FidsCodingAssignment.Utils
             if (flight == null)
                 return new FlightViewModel();
 
+            string direction = "Destination";
+            var dictionary = new Dictionary<string, object>();
+            if(flight.FlightDirection == FlightDirection.Arriving)
+            {
+                direction = "Origin";
+            }
+
+            dictionary.Add(direction, flight.CityName);
+
             return new FlightViewModel
             {
                 FlightId = flight.FlightId,
@@ -23,7 +32,8 @@ namespace FidsCodingAssignment.Utils
                 BoardingTime = flight.BoardingTime,
                 FlightStatus = flight.FlightStatus,
                 IsCurrentlyAtGate = flight.IsCurrentlyAtGate,
-                FlightDirection = flight.FlightDirection.ToDescription()
+                FlightDirection = flight.FlightDirection.ToDescription(),
+                AdditionalData = dictionary
             };
         }
 

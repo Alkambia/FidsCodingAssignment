@@ -10,6 +10,8 @@ namespace FidsCodingAssignment.ViewModel
         public DateTime? ActualTime { get; set; }
         public string AirLineCode { get; set; }
         public int FlightNumber { get; set; }
+
+        [JsonIgnore]
         public string CityName { get; set; }
         public string GateId { get; set; }
         public bool FlightInGate { get; set; }
@@ -17,5 +19,8 @@ namespace FidsCodingAssignment.ViewModel
         public string FlightStatus { get; set; }
         public bool IsCurrentlyAtGate { get; set; }
         public string FlightDirection { get; set; }
+
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalData { get; set; }
     }
 }
