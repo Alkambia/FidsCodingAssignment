@@ -22,72 +22,70 @@ namespace FlightXUnitTest
         {
             get
             {
+                var onTimeDate = DateTime.Now;
                 return new List<FlightDataModel> {
+                    //Departing, Depart 30 minutes late
                     new FlightDataModel{
                         FlightId = 541420706,
                         SchedTime = DateTime.Now,
-                        ArrDep = "DEP",
-                        ActualTime = DateTime.Now,
+                        ActualTime = DateTime.Now.AddMinutes(30),
                         AirLineCode = "NK",
-                        FlightNumber = 163,
-                        ParentFlightId = 0,
-                        CityName = "Atlanta",
+                        FlightNumber = 162,
+                        CityName = "Georgia",
                         GateCode = "E32",
-                        FlightStatusCode = "",
-                        AirCraftRegNumber = "N948NK",
-                        AirPortcode = "",
-                        AirCraftType = "",
-                        Tail = "",
-                        TerminalCode = "",
-                        AirlineName = "",
-                        ParentAirlineCode = "",
-                        ParentFltNumber = 0,
-                        EstimatedTime = DateTime.Now,
-                        Remarks = "On Time",
-                        ParrentSuffix = "0",
-                        Suffix = "0",
-                        ViaAirPortCodes = "",
-                        EventTime = "",
-                        FlightType = "D",
-                        Event = "",
-                        DepBoardingStartDtm = DateTime.Now,
-                        BagBelt = "",
-                        RemoteAirportSchDtm = DateTime.Now,
-                        RemoteAirportActDtm = DateTime.Now,
-                        RemoteAirportEstDtm = DateTime.Now
+                        ArrDep = "DEP"
+                    },
+                    //Arriving ontime
+                    new FlightDataModel{
+                        FlightId = 541420707,
+                        SchedTime = onTimeDate,
+                        ActualTime = onTimeDate,
+                        AirLineCode = "NL",
+                        FlightNumber = 163,
+                        CityName = "Atlanta",
+                        GateCode = "E33",
+                        ArrDep = "ARR"
                     },
                     new FlightDataModel{
-                        FlightId = 541406104,
-                        SchedTime = DateTime.Parse("2023-08-08T13:00:00Z"),
-                        ArrDep = "DEP",
-                        ActualTime = DateTime.Parse("2023-08-08T12:49:00Z"),
-                        AirLineCode = "SY",
-                        FlightNumber = 505,
-                        ParentFlightId = 0,
-                        CityName = "Cancun MX",
-                        GateCode = "",
-                        FlightStatusCode = "",
-                        AirCraftRegNumber = "N822SY",
-                        AirPortcode = "CUN",
-                        AirCraftType = "B738",
-                        Tail = "",
-                        TerminalCode = "",
-                        AirlineName = "SUN COUNTRY",
-                        ParentAirlineCode = "",
-                        ParentFltNumber = 0,
-                        EstimatedTime = DateTime.Parse("2023-08-08T12:49:00Z"),
-                        Remarks = "At 7:49a",
-                        ParrentSuffix = "0",
-                        Suffix = "0",
-                        ViaAirPortCodes = "",
-                        EventTime = "",
-                        FlightType = "D",
-                        Event = "",
-                        DepBoardingStartDtm = DateTime.Now,
-                        BagBelt = "",
-                        RemoteAirportSchDtm = DateTime.Now,
-                        RemoteAirportActDtm = DateTime.Now,
-                        RemoteAirportEstDtm = DateTime.Now
+                        FlightId = 541420708,
+                        SchedTime = DateTime.Now.AddMinutes(40),
+                        ActualTime = DateTime.Now.AddMinutes(20),
+                        AirLineCode = "NM",
+                        FlightNumber = 163,
+                        CityName = "Athens",
+                        GateCode = "E33",
+                        ArrDep = "DEP"
+                    },
+                    new FlightDataModel{
+                        FlightId = 541420709,
+                        SchedTime = DateTime.Now,
+                        ActualTime = DateTime.Now.AddMinutes(31),
+                        AirLineCode = "NN",
+                        FlightNumber = 164,
+                        CityName = "Athens",
+                        GateCode = "E34",
+                        ArrDep = "DEP"
+                    },
+                    //Arriving  Late
+                    new FlightDataModel{
+                        FlightId = 541420710,
+                        SchedTime = DateTime.Now,
+                        ActualTime = DateTime.Now.AddMinutes(40),
+                        AirLineCode = "NO",
+                        FlightNumber = 165,
+                        CityName = "London",
+                        GateCode = "E35",
+                        ArrDep = "ARR"
+                    },
+                    new FlightDataModel{
+                        FlightId = 541420711,
+                        SchedTime = onTimeDate,
+                        ActualTime = onTimeDate,
+                        AirLineCode = "NP",
+                        FlightNumber = 166,
+                        CityName = "Belfast",
+                        GateCode = "E36",
+                        ArrDep = "DEP"
                     }
                 };
             }
