@@ -18,32 +18,33 @@ namespace FidsCodingAssignment.Utils
                 CityName = flightdata.CityName,
                 GateId = flightdata.GateCode,
                 BoardingTime = false,
+                FlightStatus = "",
                 FlightDirection = flightdata.ArrDep.Equals("DEP") ? FlightDirection.Departing : FlightDirection.Arriving,
             };
-
 
             if (flight.FlightDirection == FlightDirection.Departing)
             {
                 var boardingWindowInMinutes = int.Parse(configuration["Flight:BoardingWindowInMinutes"]);
                 var thresholdInMinutes = int.Parse(configuration["Flight:ThresholdInMinutes"]);
-                if (flight.ActualTime >= flight.SchedTime && flight.ActualTime <= flight.SchedTime.Value.AddMinutes(boardingWindowInMinutes) 
-                    || flight.ActualTime < flight.SchedTime)
+                //CurrentTime
+                var predefinedWindow = flight.ActualTime.HasValue ? flight.ActualTime.Value.AddMinutes(boardingWindowInMinutes) 
+                    : DateTime.Now.AddMinutes(boardingWindowInMinutes);
+
+                if(DateTime.Now <= predefinedWindow || flight.ActualTime < DateTime.Now)
                 {
                     flight.BoardingTime = true;
                     flight.FlightStatus = "Boarding";
                 }
-                //note: I jus assume DateTime.Now is the current time
-                else if (flight.ActualTime.HasValue && DateTime.Now >= flight.ActualTime.Value.AddMinutes(thresholdInMinutes))
+                else
                 {
                     flight.FlightStatus = "Closed";
                 }
 
-                //note: note sure if its the correct implementation
                 var delta = int.Parse(configuration["Flight:Delta"]);
                 var deltaBefore = TimeSpan.FromMinutes(-1 * delta);
                 var deltaAfter = TimeSpan.FromMinutes(delta);
-                var timeBefore = flight.ActualTime + deltaBefore; //time before boarding
-                var timeAfter = flight.ActualTime + deltaAfter; //time after boarding
+                var timeBefore = flight.ActualTime + deltaBefore;
+                var timeAfter = flight.ActualTime + deltaAfter;
 
                 flight.IsCurrentlyAtGate = flight.ActualTime.HasValue && timeBefore <= flight.ActualTime.Value && flight.ActualTime.Value <= timeAfter;
             }
