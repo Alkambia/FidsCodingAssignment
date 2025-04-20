@@ -9,6 +9,6 @@ namespace FidsCodingAssignment.Service
         //Task<string> CheckFlightStatusAsync(int flightId);
         Task<FlightViewModel> CheckFlightStatusAsync(int flightId);
         Task<List<FlightViewModel>> GetActiveFlightsAtGateAsync(string gateCode);
-        Task<List<FlightViewModel>> GetDelayedFlightsAsync(int delta, DateTime currentDateTime);
+        Task<List<FlightViewModel>> GetDelayedFlightsAsync(int delta, DateTime? currentDateTime);
     }
 }

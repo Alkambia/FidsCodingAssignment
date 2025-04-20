@@ -41,7 +41,7 @@ namespace FidsCodingAssignment.Service
             return flights.ToViewModel();
         }
 
-        public async Task<List<FlightViewModel>> GetDelayedFlightsAsync(int delta, DateTime currentDateTime)
+        public async Task<List<FlightViewModel>> GetDelayedFlightsAsync(int delta, DateTime? currentDateTime)
         {
             var flights = await _flightRepository.GetDelayedFlights(delta, currentDateTime);
             return flights.ToViewModel();

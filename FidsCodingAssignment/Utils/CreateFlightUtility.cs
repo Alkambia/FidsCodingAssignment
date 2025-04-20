@@ -26,17 +26,10 @@ namespace FidsCodingAssignment.Utils
             {
                 var boardingWindowInMinutes = int.Parse(configuration["Flight:BoardingWindowInMinutes"]);
                 var thresholdInMinutes = int.Parse(configuration["Flight:ThresholdInMinutes"]);
-                if (flight.ActualTime >= flight.SchedTime && flight.ActualTime <= flight.SchedTime.Value.AddMinutes(boardingWindowInMinutes))
+                if (flight.ActualTime >= flight.SchedTime && flight.ActualTime <= flight.SchedTime.Value.AddMinutes(boardingWindowInMinutes) 
+                    || flight.ActualTime < flight.SchedTime)
                 {
                     flight.BoardingTime = true;
-                }
-                else if (flight.ActualTime < flight.SchedTime)
-                {
-                    flight.BoardingTime = true;
-                }
-
-                if (flight.BoardingTime)
-                {
                     flight.FlightStatus = "Boarding";
                 }
                 //note: I jus assume DateTime.Now is the current time
@@ -44,9 +37,7 @@ namespace FidsCodingAssignment.Utils
                 {
                     flight.FlightStatus = "Closed";
                 }
-
             }
-
 
             //note: note sure if its the correct implementation
             var delta = int.Parse(configuration["Flight:Delta"]);

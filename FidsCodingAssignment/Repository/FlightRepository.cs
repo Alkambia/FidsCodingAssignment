@@ -38,14 +38,19 @@ namespace FidsCodingAssignment.Repository
         }
 
         //note: I assume delta is the deltaThreshold
-        public async Task<List<Flight>> GetDelayedFlights(int deltaThreshold, DateTime currentTime)
+        public async Task<List<Flight>> GetDelayedFlights(int deltaThreshold, DateTime? currentTime)
         {
             var flights = await _cacheService.GetAsync<List<Flight>>();
             if (flights == null)
                 return new List<Flight>();
 
-            var thresholdTime = currentTime.AddMinutes(deltaThreshold);
-            return flights.Where(f => thresholdTime > f.SchedTime.Value).ToList();
+            if(currentTime.HasValue)
+            {
+                return flights.Where(f => currentTime.Value.AddMinutes(deltaThreshold) > f.SchedTime).ToList();
+            }
+
+            //note: time may differ in milliseconds
+            return flights.Where(f => f.ActualTime.HasValue ? f.ActualTime > f.SchedTime : DateTime.Now.AddMinutes(deltaThreshold) > f.SchedTime).ToList();
         }
     }
 }
