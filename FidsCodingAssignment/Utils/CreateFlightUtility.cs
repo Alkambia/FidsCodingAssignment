@@ -12,7 +12,7 @@ namespace FidsCodingAssignment.Utils
             {
                 FlightId = flightdata.FlightId,
                 SchedTime = flightdata.SchedTime,
-                ActualTime = flightdata.ActualTime,
+                ActualTime = flightdata.ActualTime.HasValue ? flightdata.ActualTime : flightdata.EstimatedTime,
                 AirLineCode = flightdata.AirLineCode,
                 FlightNumber = flightdata.FlightNumber,
                 CityName = flightdata.CityName,
@@ -40,13 +40,12 @@ namespace FidsCodingAssignment.Utils
                     flight.FlightStatus = "Closed";
                 }
 
+                var currentActualTime = flight.ActualTime.HasValue ? flight.ActualTime : DateTime.Now;
                 var delta = int.Parse(configuration["Flight:Delta"]);
-                var deltaBefore = TimeSpan.FromMinutes(-1 * delta);
-                var deltaAfter = TimeSpan.FromMinutes(delta);
-                var timeBefore = flight.ActualTime + deltaBefore;
-                var timeAfter = flight.ActualTime + deltaAfter;
+                var timeBefore = currentActualTime + TimeSpan.FromMinutes(-1 * delta); //before
+                var timeAfter = currentActualTime + TimeSpan.FromMinutes(delta); //after
 
-                flight.IsCurrentlyAtGate = flight.ActualTime.HasValue && timeBefore <= flight.ActualTime.Value && flight.ActualTime.Value <= timeAfter;
+                flight.IsCurrentlyAtGate = timeBefore <= currentActualTime && currentActualTime <= timeAfter;
             }
 
             return flight;
