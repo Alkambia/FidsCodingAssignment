@@ -76,7 +76,7 @@ namespace FlightXUnitTest
             await flightService.AddFlightsAsync(data);
 
             //Act
-            var result = await flightService.GetDelayedFlightsAsync(2);
+            var result = await flightService.GetDelayedFlightsAsync(2, DateTime.Now);
 
             //Assert
             Assert.Equal(505, result.FirstOrDefault(c => c.FlightId == 541406104).FlightNumber);

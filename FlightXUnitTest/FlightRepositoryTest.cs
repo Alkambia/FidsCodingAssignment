@@ -95,7 +95,7 @@ namespace FlightXUnitTest
                 };
             //Act
             await service.AddAsync(data);
-            var from_repo = await service.GetDelayedFlights(2);
+            var from_repo = await service.GetDelayedFlights(2, DateTime.Now);
 
             //Assert
             Assert.Equal(data.First().GateId, from_repo.First().GateId);

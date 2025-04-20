@@ -14,7 +14,6 @@ namespace FidsCodingAssignment.ViewModel
         [JsonIgnore]
         public string CityName { get; set; }
         public string GateId { get; set; }
-        public bool FlightInGate { get; set; }
         public bool BoardingTime { get; set; }
         public string FlightStatus { get; set; }
         public bool IsCurrentlyAtGate { get; set; }

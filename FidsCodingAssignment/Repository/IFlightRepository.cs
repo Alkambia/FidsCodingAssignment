@@ -8,6 +8,6 @@ namespace FidsCodingAssignment.Repository
         Task AddAsync(List<Flight> flights);
         Task<Flight?> GetAsync(int flightId);
         Task<List<Flight>> GetAsync(string gateId);
-        Task<List<Flight>> GetDelayedFlights(int delta);
+        Task<List<Flight>> GetDelayedFlights(int delta, DateTime currentTime);
     }
 }
