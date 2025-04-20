@@ -25,28 +25,23 @@ namespace FidsCodingAssignment.Utils
 
             if (flight.FlightDirection == FlightDirection.Departing)
             {
-                var boardingWindowInMinutes = int.Parse(configuration["Flight:BoardingWindowInMinutes"]);
-                var thresholdInMinutes = int.Parse(configuration["Flight:ThresholdInMinutes"]);
-                var timespanx =  flight.ActualTime - flight.SchedTime;
-                //CurrentTime? I assume its the current time
-                if (flight.ActualTime < DateTime.Now || flight.ActualTime >= (DateTime.Now.AddMinutes(-boardingWindowInMinutes)))
+                var deltaThreshold = int.Parse(configuration["Flight:DeltaThreshold"]);
+                var predefinedWindow = int.Parse(configuration["Flight:PreDefinedWindowInMinutes"]); // 30 minutes before scheduled departure time
+                flight.BoardingTime = flight.ActualTime < flight.SchedTime || flight.ActualTime >= flight.SchedTime.Value.AddMinutes(-predefinedWindow);
+
+                if (flight.BoardingTime)
                 {
-                    flight.BoardingTime = true;
                     flight.FlightStatus = "Boarding";
                 }
-
-                if (flight.ActualTime > (DateTime.Now.AddMinutes(thresholdInMinutes)))
+                else if (flight.ActualTime > (flight.SchedTime.Value.AddMinutes(deltaThreshold)))
                 {
                     flight.FlightStatus = "Closed";
                 }
 
-                var currentActualTime = flight.ActualTime.HasValue ? flight.ActualTime : DateTime.Now;
-                var delta = int.Parse(configuration["Flight:Delta"]);
-                var timeBefore = currentActualTime + TimeSpan.FromMinutes(-1 * delta); //before
-                var timeAfter = currentActualTime + TimeSpan.FromMinutes(delta); //after
-
-                flight.IsCurrentlyAtGate = timeBefore <= currentActualTime && currentActualTime <= timeAfter;
+                flight.IsCurrentlyAtGate = flight.ActualTime >= (flight.SchedTime.Value.AddMinutes(-deltaThreshold))
+                    && flight.ActualTime <= (flight.SchedTime.Value.AddMinutes(deltaThreshold));
             }
+
 
             return flight;
         }

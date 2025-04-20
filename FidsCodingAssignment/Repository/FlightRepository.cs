@@ -46,7 +46,7 @@ namespace FidsCodingAssignment.Repository
 
             if(currentTime.HasValue)
             {
-                return flights.Where(f => currentTime.Value.AddMinutes(deltaThreshold) > f.SchedTime).ToList();
+                return flights.Where(f => f.ActualTime > currentTime.Value.AddMinutes(deltaThreshold)).ToList();
             }
 
             //note: time may differ in milliseconds
