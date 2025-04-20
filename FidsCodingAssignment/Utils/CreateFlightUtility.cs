@@ -37,16 +37,17 @@ namespace FidsCodingAssignment.Utils
                 {
                     flight.FlightStatus = "Closed";
                 }
+
+                //note: note sure if its the correct implementation
+                var delta = int.Parse(configuration["Flight:Delta"]);
+                var deltaBefore = TimeSpan.FromMinutes(-1 * delta);
+                var deltaAfter = TimeSpan.FromMinutes(delta);
+                var timeBefore = flight.ActualTime + deltaBefore; //time before boarding
+                var timeAfter = flight.ActualTime + deltaAfter; //time after boarding
+
+                flight.IsCurrentlyAtGate = flight.ActualTime.HasValue && timeBefore <= flight.ActualTime.Value && flight.ActualTime.Value <= timeAfter;
             }
 
-            //note: note sure if its the correct implementation
-            var delta = int.Parse(configuration["Flight:Delta"]);
-            var deltaBefore = TimeSpan.FromMinutes(-1 * delta); // Predefined delta
-            var deltaAfter = TimeSpan.FromMinutes(delta); // Predefined delta
-            var timeBefore = flight.ActualTime + deltaBefore;
-            var timeAfter = flight.ActualTime + deltaAfter;
-
-            flight.IsCurrentlyAtGate = flight.ActualTime.HasValue && timeBefore <= flight.ActualTime.Value && flight.ActualTime.Value <= timeAfter;
             return flight;
         }
 
