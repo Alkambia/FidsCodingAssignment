@@ -75,27 +75,34 @@ namespace FlightXUnitTest
 
             var cacheService = app.Services.GetService<ICacheService>();
             var service = new FlightRepository(cacheService);
+            var onTimeDate = DateTime.Now;
             var data = new List<Flight> {
-                    new Flight{
-                        FlightId = 541420706,
-                        SchedTime = DateTime.Now,
-                        ActualTime = DateTime.Now,
-                        AirLineCode = "NK",
-                        FlightNumber = 163,
-                        CityName = "Atlanta"
-                    },
-                    new Flight{
-                        FlightId = 541406104,
-                        SchedTime = DateTime.Parse("2023-08-08T13:00:00Z"),
-                        ActualTime = DateTime.Parse("2023-08-08T12:49:00Z"),
-                        AirLineCode = "SY",
-                        FlightNumber = 505,
-                        CityName = "Cancun MX"
-                    }
-                };
+                //Departing, Depart 30 minutes late
+                new Flight{
+                    FlightId = 541420706,
+                    SchedTime = DateTime.Now,
+                    ActualTime = DateTime.Now.AddMinutes(30),
+                    AirLineCode = "NK",
+                    FlightNumber = 162,
+                    CityName = "Georgia",
+                    GateId = "E32",
+                    FlightDirection = FidsCodingAssignment.Enums.FlightDirection.Departing
+                },
+                //Arriving ontime
+                new Flight{
+                    FlightId = 541420707,
+                    SchedTime = onTimeDate,
+                    ActualTime = onTimeDate,
+                    AirLineCode = "NL",
+                    FlightNumber = 163,
+                    CityName = "Atlanta",
+                    GateId = "E33",
+                    FlightDirection = FidsCodingAssignment.Enums.FlightDirection.Arriving
+                }
+            };
             //Act
             await service.AddAsync(data);
-            var from_repo = await service.GetDelayedFlights(2, DateTime.Now);
+            var from_repo = await service.GetDelayedFlights(2, null);
 
             //Assert
             Assert.Equal(data.First().GateId, from_repo.First().GateId);

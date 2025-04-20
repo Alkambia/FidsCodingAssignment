@@ -58,10 +58,10 @@ namespace FlightXUnitTest
             await flightService.AddFlightsAsync(data);
 
             //Act
-            var result = await flightService.GetActiveFlightsAtGateAsync("E32");
+            var result = await flightService.GetActiveFlightsAtGateAsync("E36");
 
             //Assert
-            Assert.Equal(541420706, result.First().FlightId);
+            Assert.Equal(1, result.Count);
         }
 
         [Fact]
@@ -76,10 +76,10 @@ namespace FlightXUnitTest
             await flightService.AddFlightsAsync(data);
 
             //Act
-            var result = await flightService.GetDelayedFlightsAsync(2, DateTime.Now);
+            var result = await flightService.GetDelayedFlightsAsync(30);
 
             //Assert
-            Assert.Equal(505, result.FirstOrDefault(c => c.FlightId == 541406104).FlightNumber);
+            Assert.Equal(3, result.Count);
         }
     }
 }
