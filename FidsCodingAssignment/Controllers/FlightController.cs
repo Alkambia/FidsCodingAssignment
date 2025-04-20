@@ -37,10 +37,10 @@ namespace FidsCodingAssignment.Controllers
         }
 
         [HttpGet(Name = "GetDelayedFlights")]
-        public async Task<IActionResult> GetDelayedFlightsAsync(int delta, DateTime? currentUtcDateTime)
+        public async Task<IActionResult> GetDelayedFlightsAsync(int delta, DateTime? currentDateTime)
         {
-            var currentDateTime = currentUtcDateTime.HasValue ? currentUtcDateTime : DateTime.Now;
-            var delayedFlights = await _flightService.GetDelayedFlightsAsync(delta, currentDateTime.Value);
+            var currentTime = currentDateTime.HasValue ? currentDateTime : DateTime.Now;
+            var delayedFlights = await _flightService.GetDelayedFlightsAsync(delta, currentTime.Value);
             return Ok(delayedFlights);
         }
 
